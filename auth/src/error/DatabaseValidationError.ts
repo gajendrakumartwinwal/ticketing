@@ -1,9 +1,17 @@
-import { ValidationError} from "express-validator";
-
-export class DatabaseValidationError extends Error{
+export class DatabaseValidationError extends CustomError {
     reason = 'Database is not running!';
-    constructor(){
+    constructor() {
         super();
         Object.setPrototypeOf(this, DatabaseValidationError.prototype);
     }
+
+    statusCode: number = 500;
+
+    serializeErrors(): { message: string; field?: string }[] {
+        return [{
+            message: this.reason
+        }]
+    }
+
+
 }
