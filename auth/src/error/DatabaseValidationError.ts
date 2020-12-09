@@ -1,3 +1,5 @@
+import {CustomError} from "./CustomError";
+
 export class DatabaseValidationError extends CustomError {
     reason = 'Database is not running!';
     constructor() {
