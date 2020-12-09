@@ -21,8 +21,8 @@ router.post('/api/users/signup', [
     if(userObj){
         throw new BadRequestError('Email in use!');
     }
-    await User.build({email, password}).save();
-    return res.status(201).send({status: 'user created!'});
+    const savedUser = await User.build({email, password}).save();
+    return res.status(201).send(savedUser);
 });
 
 export {router as signupRouter};
