@@ -1,13 +1,13 @@
 import {CustomError} from "./CustomError";
 
-export class DatabaseValidationError extends CustomError {
-    reason = 'Database is not running!';
+export class NotFoundError extends CustomError {
+    reason = 'Route not found!';
     constructor() {
         super('Error connecting to DB');
-        Object.setPrototypeOf(this, DatabaseValidationError.prototype);
+        Object.setPrototypeOf(this, NotFoundError.prototype);
     }
 
-    statusCode: number = 500;
+    statusCode: number = 404;
 
     serializeErrors(): { message: string; field?: string }[] {
         return [{
