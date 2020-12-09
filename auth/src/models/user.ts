@@ -27,6 +27,9 @@ const userSchema = new mongoose.Schema({
     }
 });
 
+userSchema.statics.build = (attrs: UserAttrs) => {
+    return new User(attrs);
+};
 
 const User = mongoose.model<UserDoc, UserModel>('User', userSchema);
 
