@@ -7,6 +7,7 @@ import {signoutRouter} from "./routes/signout";
 import {signupRouter} from "./routes/signup";
 import {errorHandler} from "./middleware/error_handler";
 import {NotFoundError} from "./error/NotFoundError";
+import mongoose from 'mongoose';
 
 const app = express();
 app.use(json());
@@ -22,7 +23,23 @@ app.all('*', async () => {
 
 app.use(errorHandler);
 
-app.listen(3000, () => {
-    console.log('v23');
-    console.log('Auth: on 3000!');
-})
+const start = async () => {
+    try {
+        await mongoose.connect('mongodb://auth-mongo-srv:27017/auth', {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            useCreateIndex: true
+        });
+    } catch (e) {
+        console.log(e);
+    }
+
+
+    app.listen(3000, () => {
+        console.log('v23');
+        console.log('Auth: on 3000!');
+    });
+}
+
+start();
+
