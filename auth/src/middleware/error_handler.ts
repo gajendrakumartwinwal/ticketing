@@ -11,7 +11,7 @@ import {DatabaseValidationError} from "../error/DatabaseValidationError";
             }
         });
 
-        res.status(400).send(formatedError);
+        return res.status(400).send(formatedError);
     }
      if(err instanceof DatabaseValidationError){
          const formatedError = [{
@@ -19,7 +19,7 @@ import {DatabaseValidationError} from "../error/DatabaseValidationError";
              field: 'DB'
          }];
 
-         res.status(400).send(formatedError);
+         return res.status(400).send(formatedError);
      }
 
     res.status(400).send({
