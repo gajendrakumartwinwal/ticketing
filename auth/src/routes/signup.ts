@@ -25,7 +25,7 @@ router.post('/api/users/signup', [
     const userJWT = jwt.sign({
         id: user.id,
         email: user.email
-    }, 'dfsa');
+    }, process.env.JWT_KEY!);
 
     req.session = {jwt: userJWT};
 
