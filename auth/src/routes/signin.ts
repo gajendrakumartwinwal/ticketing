@@ -34,4 +34,4 @@ router.post('/api/users/signin', [
         return res.status(201).send(userInDB);
     });
 
-export {router as signupRouter};
+export {router as signRouter};
