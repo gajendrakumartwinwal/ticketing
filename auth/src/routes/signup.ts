@@ -1,10 +1,9 @@
-import express from 'express'
+import express, {Request, Response} from 'express'
 import {body, validationResult} from 'express-validator'
-import {Request, Response} from "express";
 import {RequestValidationError} from "../error/RequestValidationError";
-import {DatabaseValidationError} from "../error/DatabaseValidationError";
 import {User} from "../models/user";
 import {BadRequestError} from "../error/BadRequestError";
+import jwt from 'jsonwebtoken';
 
 const router = express.Router()
 
@@ -13,16 +12,24 @@ router.post('/api/users/signup', [
     body('password').trim().isLength({min: 4, max: 20}).withMessage('Password length must be between 4 to 20')
 ], async (req: Request, res: Response) => {
     const errors = validationResult(req);
-    if(!errors.isEmpty()){
+    if (!errors.isEmpty()) {
         throw new RequestValidationError(errors.array());
     }
     const {email, password} = req.body;
-    const userObj = await User.findOne({email});
-    if(userObj){
+    const userInDB = await User.findOne({email});
+    if (userInDB) {
         throw new BadRequestError('Email in use!');
     }
-    const savedUser = await User.build({email, password}).save();
-    return res.status(201).send(savedUser);
+    const user = await User.build({email, password})
+    await user.save();
+    const userJWT = jwt.sign({
+        id: user.id,
+        email: user.email
+    }, 'dfsa');
+
+    req.session = {jwt: userJWT};
+
+    return res.status(201).send(user);
 });
 
 export {router as signupRouter};
