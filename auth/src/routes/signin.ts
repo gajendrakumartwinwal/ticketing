@@ -16,7 +16,7 @@ router.post('/api/users/signin', [
         const {email, password} = req.body;
         const userInDB = await User.findOne({email});
         if (!userInDB) {
-            throw new BadRequestError('User already exists.');
+            throw new BadRequestError('You are not sigged in yet!');
         }
         const isPasswordMatch = Password.compare(userInDB.password, password);
         if(!isPasswordMatch){
