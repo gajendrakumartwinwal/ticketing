@@ -5,6 +5,7 @@ const errorHandler = (err: Error, req: Request, res: Response, next: NextFunctio
     if (err instanceof CustomError) {
         return res.status(err.statusCode).send({errors: err.serializeErrors()});
     }
+    console.log('GAJENDRA', err);
     res.status(400).send([
         {
             message: 'Something went wrong!'
