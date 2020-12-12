@@ -7,7 +7,7 @@ const start = async () => {
         throw new Error('JWT_KEY or MONGO_URImust be defined!');
     }
     try {
-        await natsWrapper.connect('ticketing', 'kjfal', 'http://nats-src:4222');
+        await natsWrapper.connect('ticketing', 'kjfal', 'http://nats-srv:4222');
         await mongoose.connect(process.env.MONGO_URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
