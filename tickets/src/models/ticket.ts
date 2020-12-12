@@ -14,7 +14,7 @@ interface TicketDoc extends mongoose.Document {
     userId: string
     title: string
     price: number
-    // createdAt: string
+    id: string
     // updatedAt: string
 }
 
