@@ -15,8 +15,8 @@ on:
     branches: [main]
 
 jobs:
-  test:
-    runs-on: ubuntu-latest # runs a test on Ubuntu, Windows and macOS
+  DockerTest:
+    runs-on: macos-latest # runs a test on Ubuntu, Windows and macOS
 
     steps:
       - name: Setup repo
