@@ -10,13 +10,17 @@ name: Deno
 
 on:
   push:
-    branches: [master]
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
   test:
-    runs-on: macos-latest
+    runs-on: ${{ macos-latest }} # runs a test on Ubuntu, Windows and macOS
 
     steps:
       - name: Setup repo
         uses: actions/checkout@v2
-      - run: docker -v
+        
+      - name: Run Tests
+        run: docker -v
