@@ -13,6 +13,7 @@ router.post('/api/users/signin', [
     ],
     validateRequest,
     async (req: Request, res: Response) => {
+    console.log('adding commit #1')
         const {email, password} = req.body;
         const userInDB = await User.findOne({email});
         if (!userInDB) {
