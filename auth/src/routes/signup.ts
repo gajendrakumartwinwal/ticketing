@@ -12,7 +12,7 @@ router.post('/api/users/signup', [
     ],
     validateRequest,
     async (req: Request, res: Response) => {
-        console.log('GAjendra22' )
+        console.log('GAjendra23' )
         const {email, password} = req.body;
         const userInDB = await User.findOne({email});
         if (userInDB) {
